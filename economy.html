@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>سيارات اقتصادية</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css" />
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="../index.html">العودة للرئيسية</a>
+    </div>
+  </nav>
+
+  <div class="container my-5">
+    <h2 class="text-center fw-bold mb-4">السيارات الاقتصادية</h2>
+    <div id="economy-cars" class="row g-4"></div>
+  </div>
+
+  <script>
+    // جلب وعرض السيارات الاقتصادية فقط
+    fetch('../backend/getCars.php')
+      .then(res => res.json())
+      .then(data => {
+        const economyCars = data.filter(car => car.category === 'اقتصادية');
+        const container = document.getElementById('economy-cars');
+
+        if (economyCars.length === 0) {
+          container.innerHTML = '<p class="text-center">لا توجد سيارات حالياً في هذه الفئة.</p>';
+        } else {
+          economyCars.forEach(car => {
+            const card = document.createElement('div');
+            card.className = 'col-md-4';
+            card.innerHTML = `
+              <div class="card h-100 shadow-sm">
+                <img src="../${car.image}" class="card-img-top" alt="${car.name}" />
+                <div class="card-body">
+                  <h5 class="card-title">${car.name}</h5>
+                  <p class="card-text">السعر: ${car.price} دينار/يوم</p>
+                  <button class="btn btn-primary" onclick='addToCart(${JSON.stringify(car)})'>إضافة إلى السلة</button>
+                </div>
+              </div>
+            `;
+            container.appendChild(card);
+          });
+        }
+      });
+
+    function addToCart(car) {
+      let cart = JSON.parse(localStorage.getItem('cart')) || [];
+      cart.push(car);
+      localStorage.setItem('cart', JSON.stringify(cart));
+      alert('تمت إضافة السيارة إلى السلة.');
+    }
+  </script>
+
+  <footer class="text-center py-4 bg-dark text-white">
+    <p>© 2025 Mahmoud Elyan | جميع الحقوق محفوظة</p>
+  </footer>
+
+  <div id="car-results" class="row mt-4">
+
+
+  </div>
+
+  
+  
+
+</body>
+</html>

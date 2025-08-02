@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+  <meta charset="UTF-8">
+  <title>أنواع السيارات</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      background: #f8f9fa;
+      font-family: 'Cairo', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    #footer,
+    footer {
+      margin-top: auto;
+    }
+
+    .navbar {
+      background: #fff !important;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+      border-radius: 0 0 18px 18px;
+      margin-bottom: 32px;
+      padding-top: 12px;
+      padding-bottom: 12px;
+    }
+
+    .navbar .navbar-brand img {
+      height: 80px !important;
+    }
+
+    .logo-container {
+      margin-top: 0;
+      margin-bottom: 24px;
+    }
+
+    .container.py-3 {
+      /* margin-top: 0; */
+      /* margin-bottom: 0; */
+    }
+
+    /* Remove old .car-card styles and use unified card style */
+    .model-tab {
+      background: linear-gradient(135deg, #003f7f 60%, #005fa3 100%);
+      color: #fff;
+      border-radius: 18px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.18), 0 1.5px 8px rgba(0, 0, 0, 0.10);
+      border: 1.5px solid #0077c2;
+      padding: 32px 28px 24px 28px;
+      min-width: 320px;
+      min-height: 420px;
+      max-width: 370px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 1.15rem;
+      transition: transform 0.2s, box-shadow 0.2s;
+      margin-bottom: 12px;
+    }
+
+    .model-tab img {
+      max-width: 260px;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 12px;
+      margin-bottom: 18px;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.10);
+    }
+
+    .model-tab h4 {
+      font-size: 1.35rem;
+      margin: 0 0 10px 0;
+      color: #a0d3ff;
+      font-weight: bold;
+      letter-spacing: 0.5px;
+    }
+
+    .model-tab .car-details {
+      width: 100%;
+      margin-bottom: 18px;
+      text-align: left;
+    }
+
+    .model-tab .car-details p.info-small {
+      font-size: 0.89rem;
+      color: #d0e6ff;
+      margin: 2px 0;
+      line-height: 1.5;
+    }
+
+    :dir(rtl) .model-tab .car-details {
+      text-align: right;
+    }
+
+    .model-tab .card-actions {
+      margin-top: 18px;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .model-tab button,
+    .model-tab a.btn {
+      padding: 10px 22px;
+      font-size: 1.08rem;
+      border-radius: 8px;
+      border: none;
+      background: #0077c2;
+      color: #fff;
+      cursor: pointer;
+      transition: background 0.2s;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .model-tab button:hover,
+    .model-tab a.btn:hover {
+      background: #005fa3;
+    }
+
+    .model-tab:hover {
+      transform: scale(1.04) translateY(-6px);
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.22), 0 2px 12px rgba(0, 0, 0, 0.13);
+    }
+
+    .recommended-section {
+      background: linear-gradient(135deg, #005fa3 60%, #003f7f 100%);
+      color: #fff;
+      padding: 48px 0 32px 0;
+      margin-top: 48px;
+    }
+
+    .recommended-section h2 {
+      font-weight: bold;
+      margin-bottom: 32px;
+      color: #fff;
+    }
+
+    .recommended-cars-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 32px;
+      justify-content: center;
+      margin-top: 56px;
+    }
+
+    .recommended-cars-row .model-tab {
+      min-width: 320px;
+      max-width: 370px;
+      background: #fff;
+      color: #003f7f;
+      border: 2px solid #0077c2;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    }
+
+    .recommended-cars-row .model-tab h4 {
+      color: #005fa3;
+    }
+
+    .recommended-cars-row .card-actions .btn-success {
+      background: #25d366;
+      border: none;
+    }
+
+    .recommended-cars-row .card-actions .btn-success:hover {
+      background: #128c7e;
+    }
+
+    @media (max-width: 900px) {
+      .recommended-cars-row {
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="index.html">
+        <img src="logo.png" alt="AlFakhama Logo" style="height: 80px;">
+      </a>
+      <div class="collapse navbar-collapse">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" href="index.html">الرئيسية</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="employee-dashboard.html">لوحة الموظف</a>
+          </li>
+        </ul>
+        <button class="btn btn-outline-danger" onclick="logout()">تسجيل الخروج</button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Logo -->
+  <div class="logo-container text-center my-4">
+    <a href="index.html">
+      <img src="Logo_Company.JPG" alt="ALFAKHAMA Logo" class="company-logo" />
+    </a>
+  </div>
+
+  <!-- Page Header -->
+  <div class="container py-3">
+    <h2 class="text-center mb-4">أنواع السيارات المتاحة</h2>
+    <div class="row" id="car-list">
+      <!-- سيتم تعبئة البطاقات هنا -->
+    </div>
+  </div>
+
+  <!-- ✅ Recommended Cars Section -->
+  <section class="recommended-section text-center">
+    <div class="container">
+      <h2 class="fw-bold mb-4">سيارات مقترحة لك</h2>
+      <div class="recommended-cars-row" id="recommended-cars-row">
+        <!-- سيتم تعبئة السيارات المقترحة هنا -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer id="footer" class="text-center text-white bg-dark pt-4">
+    <div class="container">
+      <p>© 2025 Mahmoud Elyan | جميع الحقوق محفوظة.</p>
+    </div>
+  </footer>
+
+  <script>
+    function logout() {
+      localStorage.removeItem("loggedInUser");
+      window.location.href = "signup.html";
+    }
+
+    const sampleCars = [
+      {
+        brand: "تويوتا",
+        model: "كامري",
+        year: 2023,
+        type: "فاخرة",
+        price: 38,
+        doors: 4,
+        seats: 5,
+        image: "Cars_Updated_Pictures/Ser_25.jpg"
+      },
+      {
+        brand: "هونداي",
+        model: "اكسنت",
+        year: 2020,
+        type: "اقتصادية",
+        price: 18,
+        doors: 4,
+        seats: 5,
+        image: "Cars_Updated_Pictures/Ser_3.jpg"
+      },
+      {
+        brand: "كيا",
+        model: "سونيت",
+        year: 2022,
+        type: "دفع رباعي",
+        price: 24,
+        doors: 4,
+        seats: 5,
+        image: "Cars_Updated_Pictures/Ser_15.jpg"
+      }
+    ];
+
+    const container = document.getElementById("car-list");
+    sampleCars.forEach(car => {
+      const col = document.createElement("div");
+      col.className = "col-md-4 mb-4";
+      col.innerHTML = `
+        <div class="model-tab">
+          <img src="${car.image}" alt="${car.model}" />
+          <h4>${car.brand} ${car.model}</h4>
+          <div class="car-details">
+            <p class="info-small"><strong>الموديل:</strong> ${car.year}</p>
+            <p class="info-small"><strong>النوع:</strong> ${car.type}</p>
+            <p class="info-small"><strong>عدد الأبواب:</strong> ${car.doors}</p>
+            <p class="info-small"><strong>عدد المقاعد:</strong> ${car.seats}</p>
+            <p class="info-small"><strong>السعر اليومي:</strong> ${car.price} د.أ</p>
+          </div>
+          <div class="card-actions">
+            <a href="#" class="btn btn-outline-secondary">تفاصيل</a>
+            <a href="https://wa.me/962780889953" target="_blank" class="btn btn-success d-flex align-items-center" style="padding: 8px 16px;">
+              <i class="bi bi-whatsapp me-2" style="font-size: 1.2rem;"></i>
+            </a>
+          </div>
+        </div>
+      `;
+      container.appendChild(col);
+    });
+
+    // Render recommended cars (3 random from sampleCars)
+    function getRandomCars(arr, n) {
+      const shuffled = arr.slice().sort(() => 0.5 - Math.random());
+      return shuffled.slice(0, n);
+    }
+    const recommendedRow = document.getElementById("recommended-cars-row");
+    if (recommendedRow) {
+      getRandomCars(sampleCars, 3).forEach(car => {
+        const div = document.createElement("div");
+        div.className = "model-tab";
+        div.innerHTML = `
+          <img src="${car.image}" alt="${car.model}" />
+          <h4>${car.brand} ${car.model}</h4>
+          <div class="car-details">
+            <p class="info-small"><strong>الموديل:</strong> ${car.year}</p>
+            <p class="info-small"><strong>النوع:</strong> ${car.type}</p>
+            <p class="info-small"><strong>عدد الأبواب:</strong> ${car.doors}</p>
+            <p class="info-small"><strong>عدد المقاعد:</strong> ${car.seats}</p>
+            <p class="info-small"><strong>السعر اليومي:</strong> ${car.price} د.أ</p>
+          </div>
+          <div class="card-actions">
+            <a href="#" class="btn btn-outline-secondary">تفاصيل</a>
+            <a href="https://wa.me/962780889953" target="_blank" class="btn btn-success d-flex align-items-center" style="padding: 8px 16px;">
+              <i class="bi bi-whatsapp me-2" style="font-size: 1.2rem;"></i>
+            </a>
+          </div>
+        `;
+        recommendedRow.appendChild(div);
+      });
+    }
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
